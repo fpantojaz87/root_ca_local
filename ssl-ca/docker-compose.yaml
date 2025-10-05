@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  ca-generator:
+    build: .
+    container_name: ca-generator
+    volumes:
+      - ./root:/ca/root
+      - ./domains:/ca/domains
+      - ./scripts:/ca/scripts
+    working_dir: /ca
+    command: tail -f /dev/null
+
+  nginx-test:
+    image: nginx:alpine
+    container_name: nginx-ssl-test
+    ports:
+      - "8443:443"
+    volumes:
+      - ./domains/test-app.local:/etc/nginx/ssl
+      - ./nginx-test.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - ca-generator
+
+volumes:
+  ca-data:
