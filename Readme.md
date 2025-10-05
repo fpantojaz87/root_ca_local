@@ -3,7 +3,7 @@
 # Instrucciones:
 ## - Descargar repositorio
 ## - Preparar el entorno
-´´´
+```
 chmod +x *.sh
 ./setup-ssl.sh
-´´´
+```
